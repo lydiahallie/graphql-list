@@ -1,42 +1,12 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { graphql, withApollo } from 'react-apollo';
+import { Button } from 'react-materialize';
+import gql from 'graphql-tag';
+import styled from 'styled-components';
 
 import ResolutionForm from './ResolutionForm';
-import RegisterForm from './RegisterForm';
-import LoginForm from './LoginForm';
-import GoalForm from './GoalForm';
-import Goal from './resolutions/Goal';
-
-const App = ({ loading, resolutions, client, user }) => {
-  return (
-    <div>
-      <button onClick={ () => {
-        Meteor.logout() 
-        client.resetStore()
-      }}>Log Out</button>
-      <LoginForm />
-      <RegisterForm />
-      <ResolutionForm />
-      <ul>
-        { !loading && 
-          resolutions.map(res => 
-          <li key={res._id}>
-            <span style={{
-              textDecoration: res.completed ? 'line-through' : 'none'
-            }}>{res.name}</span>
-            <ul>
-              { res.goals.map(x =>
-                <Goal goal={x} key={x._id} />
-              )}
-            </ul>
-            <GoalForm resolutionId={res._id} />
-          </li>
-        )}
-      </ul>
-    </div>
-  )
-}
+import { ResolutionsList } from './ResolutionsList';
+import UserAuth from './UserAuth';
 
 const resolutionsQuery = gql`
   query Resolutions {
@@ -54,7 +24,28 @@ const resolutionsQuery = gql`
       _id
     }
   }
-`
+`;
+
+const App = ({ loading, resolutions, client, user }) => (
+  <Form>
+    { user != undefined && user._id != null ?
+      <Button onClick={ () => {
+        Meteor.logout() 
+        client.resetStore() }}>
+        Log Out
+      </Button> :
+      <UserAuth client={ client } />
+    }
+    <ResolutionForm />
+    <ResolutionsList loading={ loading } resolutions={ resolutions } />
+  </Form>
+);
+
+const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default graphql(resolutionsQuery, {
   props: ({data}) => ({...data})
