@@ -12,4 +12,3 @@ type Mutation {
 type Query {
   resolutions: [Resolution]
 }
-

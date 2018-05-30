@@ -11,15 +11,15 @@ export default {
   Resolution: {
     goals: res => 
       Goals.find({
-        resolutionId: res._id
+        resolutionId: res._id,
       }).fetch(),
     completed: res => {
       const goals = Goals.find({
         resolutionId: res._id,
       }).fetch()
       if (!goals.length) return false;
-      const completedGoals = goals.filter(goal => goal.completed)
-      return goals.length === completedGoals.length
+      const completedGoals = goals.filter(goal => goal.completed);
+      return goals.length === completedGoals.length;
     }
   },
   
@@ -32,7 +32,7 @@ export default {
         });
         return Resolutions.findOne(resolutionId);
       }
-      throw new Error('Unauthorized')
+      throw new Error('Unauthorized');
     }
   }
 }

@@ -21,7 +21,7 @@ const resolvers = merge(
   GoalsResolvers,
   ResolutionsResolvers,
   UsersResolvers,
-)
+);
 
 const schema = makeExecutableSchema({
   typeDefs,

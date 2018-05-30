@@ -11,7 +11,7 @@ export default {
         });
         return Goals.findOne(goalId);
       }
-      throw new Error('Unauthorized')
+      throw new Error('Unauthorized');
     },
     toggleGoal(obj, {_id}) {
       const goal = Goals.findOne(_id);
