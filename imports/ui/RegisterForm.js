@@ -13,7 +13,10 @@ export default class RegisterForm extends Component {
     Accounts.createUser({
       email: this.emailRef.current.value,
       password: this.passRef.current.value,
-    }, (err) => console.log(err));
+    }, err => 
+      err ? console.log(err) :
+      this.props.client.resetStore()
+    )
   }
 
   render() {
