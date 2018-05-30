@@ -6,4 +6,5 @@ type Goal {
 
 extend type Mutation {
   createGoal(name: String!, resolutionId: String!): Goal
+  toggleGoal(_id: String!): Goal
 }

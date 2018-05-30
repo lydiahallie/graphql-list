@@ -9,7 +9,7 @@ import UsersResolvers from '../../api/users/resolvers';
 import GoalsSchema from '../../api/goals/Goal.graphql';
 import GoalsResolvers from '../../api/goals/resolvers';
 
-///sjkdlskaasd
+///sjkdlskaasdasdsads
 
 const typeDefs = [
   GoalsSchema,
