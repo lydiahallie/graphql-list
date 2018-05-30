@@ -2,3 +2,7 @@ type Resolution {
   _id: String!
   name: String!
 }
+
+type Mutation {
+  createResolution: Resolution
+}
