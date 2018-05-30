@@ -7,6 +7,7 @@
   "dependencies": {
     "apollo-client": "^2.3.2",
     "apollo-client-preset": "^1.0.8",
+    "babel-plugin-inline-import": "^2.0.6",
     "babel-runtime": "^6.20.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
