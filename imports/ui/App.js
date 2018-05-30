@@ -1,31 +1,29 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
-import { withApollo } from 'react-apollo';
+import { graphql, withApollo } from 'react-apollo';
 
 import ResolutionForm from './ResolutionForm';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
+import GoalForm from './GoalForm';
 
 const App = ({ loading, resolutions, client, user }) => {
-  console.log('client', client)
-  console.log("user", user)
-  console.log("resolutions", resolutions)
   return (
     <div>
       <button onClick={ () => {
         Meteor.logout() 
         client.resetStore()
       }}>Log Out</button>
-      <React.Fragment>
-        <LoginForm />
-        <RegisterForm />
-      </React.Fragment> 
+      <LoginForm />
+      <RegisterForm />
       <ResolutionForm />
       <ul>
         { !loading && 
           resolutions.map(res => 
-          <li key={res._id}>{res.name}</li>
+          <li key={res._id}>
+            {res.name}
+            <GoalForm resolutionId={res._id} />
+          </li>
         )}
       </ul>
     </div>
@@ -34,7 +32,6 @@ const App = ({ loading, resolutions, client, user }) => {
 
 const resolutionsQuery = gql`
   query Resolutions {
-    hi
     resolutions {
       _id
       name
