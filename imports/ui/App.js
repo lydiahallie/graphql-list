@@ -5,7 +5,10 @@ import { graphql } from 'react-apollo';
 
 const App = ({ data }) => (
   <ul>
-    { !data.loading && data.resolutions.map(res => <li>{res.name}</li>)}
+    { !data.loading && 
+      data.resolutions.map(res => 
+       <li key={res._id}>{res.name}</li>
+    )}
   </ul>
 );
 
